@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 
 @Composable
@@ -30,4 +32,10 @@ fun SplashScreen(navController: NavHostController) {
             style = MaterialTheme.typography.headlineLarge
         )
     }
+}
+
+@Preview
+@Composable
+fun Preview() {
+    SplashScreen(rememberNavController())
 }
