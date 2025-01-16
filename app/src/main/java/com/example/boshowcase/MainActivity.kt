@@ -9,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.boshowcase.ui.mainscreen.MainScreen
-import com.example.boshowcase.ui.profilescreen.ProfileScreen
 import com.example.boshowcase.ui.splashscreen.SplashScreen
 import com.example.boshowcase.ui.theme.BoShowcaseTheme
 
