@@ -18,6 +18,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.boshowcase.ui.model.Project
 
+/**
+ * Project Detail Screen to show each project details.
+ *
+ * @param project project to show details on this screen
+ */
 @Composable
 fun ProjectDetailsScreen(project: Project) {
     val context = LocalContext.current

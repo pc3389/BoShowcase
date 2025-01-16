@@ -9,6 +9,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
+/**
+ * Handling Bottom Navigation Bar
+ *
+ * @param navController Navigation controller for bottom navigation.
+ */
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     NavigationBar {

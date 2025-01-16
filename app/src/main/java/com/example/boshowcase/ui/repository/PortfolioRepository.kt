@@ -2,7 +2,9 @@ package com.example.boshowcase.ui.repository
 
 import com.example.boshowcase.ui.model.Project
 
-
+/**
+ * Repository for Portfolio call.
+ */
 class PortfolioRepository {
     // Mock portfolio data
     fun getProjects(): List<Project> {

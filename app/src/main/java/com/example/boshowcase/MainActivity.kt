@@ -12,6 +12,9 @@ import com.example.boshowcase.ui.mainscreen.MainScreen
 import com.example.boshowcase.ui.splashscreen.SplashScreen
 import com.example.boshowcase.ui.theme.BoShowcaseTheme
 
+/**
+ * Main Activity. This app will contain single activity.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

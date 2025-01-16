@@ -22,6 +22,11 @@ import com.example.boshowcase.R
 import com.example.boshowcase.ui.model.Profile
 import com.example.boshowcase.ui.repository.ProfileRepository
 
+/**
+ * Profile Screen.
+ *
+ * @param viewModel View Model for Profile Screen
+ */
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel(ProfileRepository())) {
     val profile by viewModel.profile.collectAsState()

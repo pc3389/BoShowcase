@@ -13,6 +13,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 
+/**
+ * Splash Screen to show before entering main screen.
+ *
+ * @param navController Navigation controller for Splash Screen and Main Screen
+ */
 @Composable
 fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {

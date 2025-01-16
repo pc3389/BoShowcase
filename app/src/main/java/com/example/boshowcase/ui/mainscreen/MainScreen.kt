@@ -18,6 +18,9 @@ import com.example.boshowcase.ui.repository.PortfolioRepository
 import com.example.boshowcase.ui.resumescreen.ResumeScreen
 import com.example.boshowcase.ui.settingsscreen.SettingsScreen
 
+/**
+ * Main Screen handling bottom navigation.
+ */
 @Composable
 fun MainScreen() {
     val bottomNavController = rememberNavController()

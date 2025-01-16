@@ -2,7 +2,9 @@ package com.example.boshowcase.ui.repository
 
 import com.example.boshowcase.ui.model.Profile
 
-
+/**
+ * Repository for Profile call.
+ */
 open class ProfileRepository {
     // Mock profile data
     fun getProfile(): Profile {

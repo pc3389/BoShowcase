@@ -8,6 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * View Model for Portfolio Screen.
+ *
+ * @param repository Repository to handle Portfolio call.
+ */
 class PortfolioViewModel(private val repository: PortfolioRepository) : ViewModel() {
 
     private val _projects = MutableStateFlow<List<Project>>(emptyList())

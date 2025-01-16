@@ -25,6 +25,12 @@ import androidx.compose.ui.unit.dp
 import com.example.boshowcase.ui.model.Project
 import com.example.boshowcase.ui.repository.PortfolioRepository
 
+/**
+ * Portfolio Screen
+ *
+ * @param viewModel Portfolio View Model
+ * @param onProjectClick Handling onClick when each item is clicked
+ */
 @Composable
 fun PortfolioScreen(
     viewModel: PortfolioViewModel = PortfolioViewModel(PortfolioRepository()),

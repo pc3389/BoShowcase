@@ -8,6 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * View Model for Profile Screen
+ *
+ * @param repository Repository to handle GetProfile call.
+ */
 class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() {
     private val _profile = MutableStateFlow<Profile?>(null)
     val profile: StateFlow<Profile?> get() = _profile

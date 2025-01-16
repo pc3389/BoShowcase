@@ -3,6 +3,13 @@ package com.example.boshowcase.ui.navigation
 import androidx.annotation.DrawableRes
 import com.example.boshowcase.R
 
+/**
+ * Bottom Navigation Items.
+ *
+ * @param route route string for navigation
+ * @param title Title showing on the bottom nav
+ * @param icon Icon showing on the bottom nav
+ */
 data class BottomNavItem(
     val route: String,
     val title: String,
