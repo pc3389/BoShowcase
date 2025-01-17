@@ -1,8 +1,5 @@
 package com.example.boshowcase.ui.projectdetailscreen
 
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.boshowcase.ui.model.Project
+import com.example.boshowcase.ui.openCustomTab
 
 /**
  * Project Detail Screen to show each project details.
@@ -54,14 +52,7 @@ fun ProjectDetailsScreen(project: Project) {
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.secondary,
             modifier = Modifier.clickable {
-                try {
-                    // Open the GitHub link in a browser
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(project.githubLink))
-                    context.startActivity(intent)
-                } catch (e: Exception) {
-                    // Show a Toast if the link cannot be opened
-                    Toast.makeText(context, "Unable to open link", Toast.LENGTH_SHORT).show()
-                }
+                openCustomTab(context, project.githubLink)
             }
         )
     }

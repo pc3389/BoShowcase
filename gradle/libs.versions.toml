@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.3"
+browser = "1.8.0"
 coreTesting = "2.2.0"
 hiltCompiler = "2.48"
 kotlinxCoroutinesTest = "1.7.3"
@@ -21,6 +22,7 @@ roomKtx = "2.6.1"
 slf4jSimple = "2.0.9"
 
 [libraries]
+androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
