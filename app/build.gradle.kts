@@ -69,19 +69,22 @@ dependencies {
     // Custom Chrome Tab
     implementation(libs.androidx.browser)
 
+    // Preference
+    implementation(libs.androidx.datastore.preferences)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    testImplementation(libs.mockito.core)
     testImplementation(libs.androidx.core.testing)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test){
+        exclude("net.bytebuddy","byte-buddy-agent")
+    }
     testImplementation(libs.mockk)
-    testImplementation(libs.logback.classic)
     testImplementation(libs.slf4j.simple)
+    testImplementation(libs.byte.buddy.agent)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

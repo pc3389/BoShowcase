@@ -5,7 +5,7 @@ import com.example.boshowcase.ui.model.Certification
 import com.example.boshowcase.ui.model.Education
 import com.example.boshowcase.ui.model.Experience
 import com.example.boshowcase.ui.model.Resume
-import com.example.boshowcase.ui.repository.ResumeRepository
+import com.example.boshowcase.repository.ResumeRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

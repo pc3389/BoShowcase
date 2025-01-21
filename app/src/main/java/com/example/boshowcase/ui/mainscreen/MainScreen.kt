@@ -14,7 +14,7 @@ import com.example.boshowcase.ui.navigation.BottomNavigationBar
 import com.example.boshowcase.ui.portfolioscreen.PortfolioScreen
 import com.example.boshowcase.ui.profilescreen.ProfileScreen
 import com.example.boshowcase.ui.projectdetailscreen.ProjectDetailsScreen
-import com.example.boshowcase.ui.repository.PortfolioRepository
+import com.example.boshowcase.repository.PortfolioRepository
 import com.example.boshowcase.ui.resumescreen.ResumeScreen
 import com.example.boshowcase.ui.settingsscreen.SettingsScreen
 

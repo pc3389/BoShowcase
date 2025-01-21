@@ -3,7 +3,7 @@ package com.example.boshowcase.ui.profilescreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.boshowcase.ui.model.Profile
-import com.example.boshowcase.ui.repository.ProfileRepository
+import com.example.boshowcase.repository.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.boshowcase.R
 import com.example.boshowcase.ui.model.Profile
-import com.example.boshowcase.ui.repository.ProfileRepository
+import com.example.boshowcase.repository.ProfileRepository
 
 /**
  * Profile Screen.

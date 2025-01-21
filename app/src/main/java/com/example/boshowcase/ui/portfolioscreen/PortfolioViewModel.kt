@@ -3,7 +3,7 @@ package com.example.boshowcase.ui.portfolioscreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.boshowcase.ui.model.Project
-import com.example.boshowcase.ui.repository.PortfolioRepository
+import com.example.boshowcase.repository.PortfolioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

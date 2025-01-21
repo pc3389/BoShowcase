@@ -2,7 +2,7 @@ package com.example.boshowcase.ui.portfolioscreen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.boshowcase.ui.model.Project
-import com.example.boshowcase.ui.repository.PortfolioRepository
+import com.example.boshowcase.repository.PortfolioRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

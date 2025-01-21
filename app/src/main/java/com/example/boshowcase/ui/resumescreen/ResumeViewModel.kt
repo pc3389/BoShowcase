@@ -3,7 +3,7 @@ package com.example.boshowcase.ui.resumescreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.boshowcase.ui.model.Resume
-import com.example.boshowcase.ui.repository.ResumeRepository
+import com.example.boshowcase.repository.ResumeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

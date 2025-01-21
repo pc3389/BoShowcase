@@ -1,4 +1,4 @@
-package com.example.boshowcase.ui.repository
+package com.example.boshowcase.repository
 
 import com.example.boshowcase.ui.model.Project
 

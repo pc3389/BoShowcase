@@ -2,7 +2,7 @@ package com.example.boshowcase.ui.profilescreen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.boshowcase.ui.model.Profile
-import com.example.boshowcase.ui.repository.ProfileRepository
+import com.example.boshowcase.repository.ProfileRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

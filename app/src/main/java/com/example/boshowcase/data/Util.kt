@@ -1,4 +1,4 @@
-package com.example.boshowcase.ui
+package com.example.boshowcase.data
 
 import android.content.Context
 import android.net.Uri
