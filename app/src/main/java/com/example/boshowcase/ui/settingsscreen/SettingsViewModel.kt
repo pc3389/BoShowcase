@@ -14,7 +14,11 @@ class SettingsViewModel(
 
     fun setDarkTheme(enabled: Boolean) {
         viewModelScope.launch {
-            preferencesManager.setDarkTheme(enabled)
+            try {
+                preferencesManager.setDarkTheme(enabled)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

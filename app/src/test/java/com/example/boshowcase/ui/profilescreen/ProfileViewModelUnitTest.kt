@@ -2,7 +2,7 @@ package com.example.boshowcase.ui.profilescreen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.boshowcase.ui.model.Profile
-import com.example.boshowcase.repository.ProfileRepository
+import com.example.boshowcase.data.repository.ProfileRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
@@ -48,7 +48,6 @@ class ProfileViewModelTest {
             title = "Android Developer",
             bio = "Passionate about Android development.",
             skills = listOf("Kotlin", "Jetpack Compose"),
-            experiences = listOf("3 years at TD Bank", "Built 5+ apps")
         )
         coEvery { mockRepository.getProfile() } returns mockProfile
 

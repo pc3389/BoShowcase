@@ -3,7 +3,7 @@ package com.example.boshowcase.ui.profilescreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.boshowcase.ui.model.Profile
-import com.example.boshowcase.repository.ProfileRepository
+import com.example.boshowcase.data.repository.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -31,6 +31,17 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
             } catch (e: Exception) {
                 // Handle errors if any (e.g., log or show error state)
                 _profile.value = null
+            }
+        }
+    }
+
+    fun saveProfile(profile: Profile) {
+        viewModelScope.launch {
+            try {
+                repository.saveProfile(profile)
+                _profile.value = profile // Update local state
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

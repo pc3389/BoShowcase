@@ -11,19 +11,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.boshowcase.data.repository.FirestoreManager
 import com.example.boshowcase.ui.model.Project
-import com.example.boshowcase.repository.PortfolioRepository
+import com.example.boshowcase.data.repository.PortfolioRepository
 
 /**
  * Portfolio Screen
@@ -33,17 +36,63 @@ import com.example.boshowcase.repository.PortfolioRepository
  */
 @Composable
 fun PortfolioScreen(
-    viewModel: PortfolioViewModel = PortfolioViewModel(PortfolioRepository()),
+    viewModel: PortfolioViewModel,
     onProjectClick: (Project) -> Unit
 ) {
     val projects by viewModel.projects.collectAsState()
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+    // Load projects when the screen is opened
+    LaunchedEffect(Unit) {
+        viewModel.loadProjects()
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(projects) { project ->
-            ProjectCard(project, onClick = { onProjectClick(project) })
+        // Portfolio Title
+        Text(
+            text = "Portfolio",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        // Add Project Button
+        Button(
+            onClick = {
+                // Example project to add
+                // TODO replace with actual input in a dialog
+                val newProject = Project(
+                    id = System.currentTimeMillis().toString(), // Unique ID
+                    title = "New Project",
+                    description = "This is a sample project.",
+                    technologies = listOf("Kotlin", "Compose"),
+                    githubLink = "https://example.com/project1.jpg"
+                )
+                viewModel.saveProject(newProject)
+            },
+            modifier = Modifier.padding(top = 8.dp)
+        ) {
+            Text("Add Project")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        projects?.let{
+            // LazyColumn for Project List
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(it) { project ->
+                    ProjectCard(
+                        project = project,
+                        onClick = { onProjectClick(project) }
+                    )
+                }
+            }
         }
     }
 }
@@ -74,23 +123,6 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun PortfolioPreview() {
-    val projects by PortfolioViewModel(PortfolioRepository()).projects.collectAsState()
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(projects) { project ->
-            ProjectCard(project, {})
         }
     }
 }

@@ -2,10 +2,8 @@ package com.example.boshowcase.ui.resumescreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.boshowcase.ui.model.Resume
-import com.example.boshowcase.repository.ResumeRepository
+import com.example.boshowcase.data.repository.ResumeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -16,26 +14,30 @@ import kotlinx.coroutines.launch
  */
 class ResumeViewModel(private val repository: ResumeRepository) : ViewModel() {
 
-    private val _resume = MutableStateFlow<Resume?>(null)
-    val resume: StateFlow<Resume?> get() = _resume.asStateFlow()
-
-    init {
-        loadResume()
-    }
+    private val _resumeUrl = MutableStateFlow<String?>(null)
+    val resumeUrl = _resumeUrl.asStateFlow()
 
     /**
      * Load resume from Repository and
      */
-    fun loadResume() {
+    fun loadResumeUrl() {
         viewModelScope.launch {
             try {
-                // Fetch profile from repository
-                val resume = repository.getResume()
-                // Update the state flow
-                _resume.value = resume
+                _resumeUrl.value = repository.getResumeUrl()
             } catch (e: Exception) {
-                // Handle errors if any (e.g., log or show error state)
-                _resume.value = Resume()
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun uploadResume(uri: android.net.Uri) {
+        viewModelScope.launch {
+            try {
+                val url = repository.uploadResume(uri)
+                repository.saveResumeUrl(url)
+                _resumeUrl.value = url
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

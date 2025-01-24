@@ -1,5 +1,7 @@
 package com.example.boshowcase.ui.model
 
+import com.google.firebase.firestore.IgnoreExtraProperties
+
 /**
  * Project data class for Project Screen.
  *
@@ -8,9 +10,11 @@ package com.example.boshowcase.ui.model
  * @param technologies technologies used on the project
  * @param githubLink github link for the project
  */
+@IgnoreExtraProperties
 data class Project(
+    val id: String = "",
     val title: String = "",
     val description: String = "",
-    val technologies: List<String> = listOf(),
+    val technologies: List<String> = emptyList(),
     val githubLink: String = ""
 )

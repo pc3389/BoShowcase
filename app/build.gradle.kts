@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt) // Hilt plugin
     alias(libs.plugins.ksp) // ksp
+    alias(libs.plugins.google.services) // Google Services plugin
     kotlin("kapt") // Add this to enable KAPT
 }
 
@@ -58,6 +59,9 @@ dependencies {
     // Compose Navigation
     implementation(libs.androidx.navigation.compose)
 
+    // Image
+    implementation(libs.coil.compose)
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
@@ -72,6 +76,15 @@ dependencies {
     // Preference
     implementation(libs.androidx.datastore.preferences)
 
+    // Import the Firebase BOM to manage Firebase library versions
+    implementation(platform(libs.firebase.bom))
+
+    // Add individual Firebase services
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.firebase.analytics.ktx) // Optional, for analytics
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -79,12 +92,9 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     testImplementation(libs.androidx.core.testing)
-    testImplementation(libs.kotlinx.coroutines.test){
-        exclude("net.bytebuddy","byte-buddy-agent")
-    }
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.slf4j.simple)
-    testImplementation(libs.byte.buddy.agent)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

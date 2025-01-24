@@ -1,22 +1,18 @@
 package com.example.boshowcase.ui.resumescreen
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.boshowcase.ui.model.Certification
-import com.example.boshowcase.ui.model.Education
-import com.example.boshowcase.ui.model.Experience
-import com.example.boshowcase.ui.model.Resume
-import com.example.boshowcase.repository.ResumeRepository
+import android.net.Uri
+import com.example.boshowcase.TestCoroutineRule
+import com.example.boshowcase.data.repository.ResumeRepository
+import io.mockk.Runs
 import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.coVerifySequence
+import io.mockk.just
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.Dispatchers
+import junit.framework.TestCase.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,67 +22,78 @@ import org.junit.Test
 class ResumeViewModelUnitTest {
 
     @get:Rule
-    val instantExecutorRule = InstantTaskExecutorRule()
+    val dispatcherRule = TestCoroutineRule()
 
-    private val testDispatcher = StandardTestDispatcher()
     private lateinit var repository: ResumeRepository
     private lateinit var viewModel: ResumeViewModel
 
     @Before
     fun setUp() {
-        Dispatchers.setMain(testDispatcher)
-        repository = mockk()
+        repository = mockk(relaxed = true)
         viewModel = ResumeViewModel(repository)
     }
 
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
+    @Test
+    fun `loadResumeUrl should fetch resume URL from repository`() = dispatcherRule.runTest {
+        // Arrange
+        val expectedUrl = "https://example.com/resume.pdf"
+        coEvery { repository.getResumeUrl() } returns expectedUrl
+
+        // Act
+        viewModel.loadResumeUrl()
+        dispatcherRule.dispatcher.scheduler.advanceUntilIdle()
+
+        // Assert
+        assertEquals(expectedUrl, viewModel.resumeUrl.first())
+        coVerify { repository.getResumeUrl() }
     }
 
     @Test
-    fun `loadResume updates resume state`() = runTest {
+    fun `uploadResume should save resume URL and update state`() = dispatcherRule.runTest {
         // Arrange
-        val mockResume = Resume(
-            experiences = listOf(
-                Experience("Android Developer", "TD Bank", "Jan 2020 - Dec 2022", "Built modern Android apps."),
-            ),
-            education = listOf(
-                Education("B.Sc. Computer Science", "University of Technology", "2014 - 2018")
-            ),
-            certifications = listOf(
-                Certification("Kotlin Certification", "JetBrains", "2021")
-            ),
-            linkedIn = "https://www.linkedin.com/test"
-        )
-        coEvery { repository.getResume() } returns mockResume
+        val uri = mockk<Uri>()
+        val expectedUrl = "https://example.com/resume.pdf"
+        coEvery { repository.uploadResume(uri) } returns expectedUrl
+        coEvery { repository.saveResumeUrl(expectedUrl) } just Runs
 
         // Act
-        viewModel.loadResume()
-        testDispatcher.scheduler.advanceUntilIdle()
+        viewModel.uploadResume(uri)
+        dispatcherRule.dispatcher.scheduler.advanceUntilIdle()
 
         // Assert
-        val result = viewModel.resume.first()
-        assertEquals(mockResume, result)
+        assertEquals(expectedUrl, viewModel.resumeUrl.first())
+        coVerifySequence {
+            repository.uploadResume(uri)
+            repository.saveResumeUrl(expectedUrl)
+        }
     }
 
     @Test
-    fun `loadResume handles empty resume`() = runTest {
+    fun `loadResumeUrl should handle exception`() = dispatcherRule.runTest {
         // Arrange
-        val emptyResume = Resume(
-            experiences = emptyList(),
-            education = emptyList(),
-            certifications = emptyList(),
-            linkedIn = ""
-        )
-        coEvery { repository.getResume() } throws RuntimeException("Repository error")
+        coEvery { repository.getResumeUrl() } throws Exception("Failed to fetch URL")
 
         // Act
-        viewModel.loadResume()
-        testDispatcher.scheduler.advanceUntilIdle()
+        viewModel.loadResumeUrl()
+        dispatcherRule.dispatcher.scheduler.advanceUntilIdle()
 
         // Assert
-        val result = viewModel.resume.first()
-        assertEquals(emptyResume, result)
+        assertNull(viewModel.resumeUrl.first())
+        coVerify { repository.getResumeUrl() }
+    }
+
+    @Test
+    fun `uploadResume should handle exception`() = dispatcherRule.runTest {
+        // Arrange
+        val uri = mockk<Uri>()
+        coEvery { repository.uploadResume(uri) } throws Exception("Failed to upload resume")
+
+        // Act
+        viewModel.uploadResume(uri)
+        dispatcherRule.dispatcher.scheduler.advanceUntilIdle()
+
+        // Assert
+        assertNull(viewModel.resumeUrl.first())
+        coVerify { repository.uploadResume(uri) }
     }
 }

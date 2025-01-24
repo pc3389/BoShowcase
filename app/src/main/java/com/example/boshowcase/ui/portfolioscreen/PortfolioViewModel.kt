@@ -1,9 +1,10 @@
 package com.example.boshowcase.ui.portfolioscreen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.boshowcase.ui.model.Project
-import com.example.boshowcase.repository.PortfolioRepository
+import com.example.boshowcase.data.repository.PortfolioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -15,8 +16,8 @@ import kotlinx.coroutines.launch
  */
 class PortfolioViewModel(private val repository: PortfolioRepository) : ViewModel() {
 
-    private val _projects = MutableStateFlow<List<Project>>(emptyList())
-    val projects: StateFlow<List<Project>> get() = _projects
+    private val _projects = MutableStateFlow<List<Project>?>(null)
+    val projects: StateFlow<List<Project>?> get() = _projects
 
     init {
         loadProjects()
@@ -25,14 +26,29 @@ class PortfolioViewModel(private val repository: PortfolioRepository) : ViewMode
     fun loadProjects() {
         viewModelScope.launch {
             try {
-                // Fetch profile from repository
+                // Fetch projects from the repository
                 val project = repository.getProjects()
                 // Update the state flow
                 _projects.value = project
             } catch (e: Exception) {
-                // Handle errors if any (e.g., log or show error state)
+                // Handle errors (set default or empty project)
                 _projects.value = listOf(Project())
             }
         }
+    }
+
+    fun saveProject(project: Project) {
+        viewModelScope.launch {
+            try {
+                repository.saveProject(project)
+                loadProjects() // Refresh the project list
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun findProjectById(id: String): Project? {
+        return _projects.value?.let { it.find { it.id == id } }
     }
 }
