@@ -1,7 +1,6 @@
 [versions]
 agp = "8.8.0"
 browser = "1.8.0"
-byteBuddyAgent = "1.14.17"
 coilCompose = "2.4.0"
 coreTesting = "2.2.0"
 datastorePreferences = "1.1.2"
@@ -18,6 +17,7 @@ activityCompose = "1.9.3"
 composeBom = "2024.12.01"
 mockk = "1.13.16"
 navigationCompose = "2.8.5"
+playServicesAuth = "21.3.0"
 roomKtx = "2.6.1"
 slf4jSimple = "2.0.9"
 googleService = "4.4.0"
@@ -31,7 +31,6 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
-byte-buddy-agent = { module = "net.bytebuddy:byte-buddy-agent", version.ref = "byteBuddyAgent" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltCompiler" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
@@ -50,6 +49,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx" }

@@ -11,8 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.boshowcase.data.preference.PreferencesManager
+import com.example.boshowcase.ui.loginscreen.LoginScreen
 import com.example.boshowcase.ui.mainscreen.MainScreen
 import com.example.boshowcase.ui.settingsscreen.SettingsViewModel
+import com.example.boshowcase.ui.signupscreen.SignUpScreen
 import com.example.boshowcase.ui.splashscreen.SplashScreen
 import com.example.boshowcase.ui.theme.BoShowcaseTheme
 
@@ -43,6 +45,8 @@ fun BoShowcaseApp(viewModel: SettingsViewModel) {
 fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "splash") {
         composable("splash") { SplashScreen(navController) }
-        composable("main") { MainScreen() }
+        composable("login") { LoginScreen(navController) }
+        composable("signup") { SignUpScreen(navController) }
+        composable("main") { MainScreen(navController = navController) }
     }
 }

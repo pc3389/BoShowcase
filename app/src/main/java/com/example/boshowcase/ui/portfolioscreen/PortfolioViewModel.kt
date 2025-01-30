@@ -1,6 +1,5 @@
 package com.example.boshowcase.ui.portfolioscreen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.boshowcase.ui.model.Project

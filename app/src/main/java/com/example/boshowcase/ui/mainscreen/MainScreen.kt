@@ -4,13 +4,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.boshowcase.data.repository.FirestoreManager
-import com.example.boshowcase.ui.model.Project
 import com.example.boshowcase.ui.navigation.BottomNavigationBar
 import com.example.boshowcase.ui.portfolioscreen.PortfolioScreen
 import com.example.boshowcase.ui.profilescreen.ProfileScreen
@@ -51,7 +51,7 @@ private val resumeViewModel by lazy {
  * Main Screen handling bottom navigation.
  */
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavHostController) {
     val bottomNavController = rememberNavController()
 
     Scaffold(
@@ -85,7 +85,9 @@ fun MainScreen() {
             composable("resume") {
                 ResumeScreen(resumeViewModel)
             }
-            composable("settings") { SettingsScreen() }
+            composable("settings") { SettingsScreen(
+                navController = navController
+            ) }
         }
     }
 }

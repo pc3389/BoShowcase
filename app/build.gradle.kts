@@ -85,6 +85,9 @@ dependencies {
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.analytics.ktx) // Optional, for analytics
 
+    // For Google Identity Services (One Tap)
+    implementation(libs.play.services.auth)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

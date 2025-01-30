@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 
 /**
@@ -21,10 +22,20 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {
-        // Simulate a 3-second delay, then navigate to the main screen.
-        delay(3000)
-        navController.navigate("main") {
-            popUpTo("splash") { inclusive = true }
+        // Simulate a brief loading or branding delay
+        delay(2000)
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            // No user -> go to Login
+            navController.navigate("login") {
+                popUpTo("splash") { inclusive = true }
+            }
+        } else {
+            // Already signed in -> go to Main
+            navController.navigate("main") {
+                popUpTo("splash") { inclusive = true }
+            }
         }
     }
 
