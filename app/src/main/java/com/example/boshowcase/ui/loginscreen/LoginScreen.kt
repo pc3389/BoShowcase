@@ -36,8 +36,8 @@ fun LoginScreen(navController: NavHostController) {
     val auth = remember { FirebaseAuth.getInstance() }
 
     // Email/Password fields
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf(context.getString(R.string.empty_string)) }
+    var password by remember { mutableStateOf(context.getString(R.string.empty_string)) }
 
     Column(
         modifier = Modifier
@@ -49,7 +49,7 @@ fun LoginScreen(navController: NavHostController) {
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Email") },
+            label = { Text(context.getString(R.string.email)) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -63,7 +63,11 @@ fun LoginScreen(navController: NavHostController) {
         Button(
             onClick = {
                 if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(context, "Email Login Failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.email_login_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -71,14 +75,18 @@ fun LoginScreen(navController: NavHostController) {
                                 popUpTo("login") { inclusive = true }
                             }
                         } else {
-                            Toast.makeText(context, "Email Login Failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.email_login_failed),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Sign in with Email")
+            Text(context.getString(R.string.sign_in_with_email))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -88,7 +96,7 @@ fun LoginScreen(navController: NavHostController) {
             onClick = { navController.navigate("signup") },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Create New Account")
+            Text(context.getString(R.string.create_new_account))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -107,13 +115,17 @@ fun LoginScreen(navController: NavHostController) {
                             popUpTo("login") { inclusive = true }
                         }
                     } else {
-                        Toast.makeText(context, "Guest Login Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.guest_login_failed),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Continue as Guest")
+            Text(context.getString(R.string.continue_as_guest))
         }
     }
 }
@@ -156,14 +168,26 @@ fun OneTapSignInButton(navController: NavHostController) {
                             popUpTo("login") { inclusive = true }
                         }
                     } else {
-                        Toast.makeText(context, "One Tap sign-in failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.one_tab_sign_in_failed),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } else {
-                Toast.makeText(context, "No ID token!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.no_id_token),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         } else {
-            Toast.makeText(context, "One Tap canceled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.one_tab_canceled),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -172,11 +196,16 @@ fun OneTapSignInButton(navController: NavHostController) {
         onClick = {
             oneTapClient.beginSignIn(signInRequest)
                 .addOnSuccessListener { result ->
-                    val intentSenderRequest = IntentSenderRequest.Builder(result.pendingIntent).build()
+                    val intentSenderRequest =
+                        IntentSenderRequest.Builder(result.pendingIntent).build()
                     launcher.launch(intentSenderRequest)
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(context, "One Tap sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "${context.getString(R.string.one_tab_sign_in_failed)} ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         },
         modifier = Modifier.fillMaxWidth()

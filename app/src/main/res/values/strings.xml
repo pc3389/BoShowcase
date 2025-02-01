@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">BoShowcase</string>
     <string name="default_web_client_id">aa</string>
+    <string name="empty_string" />
+    <string name="email">Email</string>
+    <string name="email_login_failed">Email Login Failed</string>
+    <string name="sign_in_with_email">Sign in with Email</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="guest_login_failed">Guest Login Failed</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="one_tab_sign_in_failed">One Tap sign-in failed</string>
+    <string name="no_id_token">No ID token!</string>
+    <string name="one_tab_canceled">One Tap canceled</string>
 </resources>
