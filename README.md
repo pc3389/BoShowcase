@@ -42,9 +42,7 @@ Navigation Compose: For seamless navigation.
 
 Hilt: For dependency injection.
 
-Room: For local data storage.
-
-Retrofit: For networking (if applicable).
+Firebase: Online data storage
 
 Material3: For UI theming and design.
 
